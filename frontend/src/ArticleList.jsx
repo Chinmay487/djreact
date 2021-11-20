@@ -1,11 +1,18 @@
 import React,{useState,useEffect,useCallback} from 'react';
 import NewArticleForm from './NewArticleForm';
 import axios from 'axios';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import {useSelector} from 'react-redux'
+import Navbar from './Navbar';
 
 const ArticleList = () => {
 
     let id = 100;
+
+    const authState = useSelector((state)=>{
+        return state.authReducer.token;
+    });
+
 
     const [articleList,setArticleList] = useState([]);
 
@@ -23,6 +30,7 @@ const ArticleList = () => {
 
     return (
         <>
+        <Navbar/>
             <h1>Article List View</h1>
             {
                 articleList.map((article)=>{
@@ -36,7 +44,12 @@ const ArticleList = () => {
                     );
                 })
             }
-            <NewArticleForm/>
+            {
+                authState !== null? 
+                <NewArticleForm/>
+                :
+                <h1>Login to add new article</h1>
+            }
         </>
     );
 }

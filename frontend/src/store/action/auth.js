@@ -54,10 +54,10 @@ const makeRequest = (data,path) => {
         localStorage.setItem('token',token);
         localStorage.setItem('expirationDate',expirationDate);
         checkAuthTimeout(3600)
-        authSuccess(token);
+        return authSuccess(token);
     })
     .catch((error) => {
-        authFail(error);
+        return authFail(error);
     })
     }
 }
@@ -114,9 +114,9 @@ export const authCheckState =  (dispatch) => {
             checkAuthTimeout(remainingTime);
             return {
                 type : AUTH_SUCCESS,
-                token : token
+                token : token,
             }
-            // authSuccess(token);
+            // authSuccess(token,username);
         }
     }
 }

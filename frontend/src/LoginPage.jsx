@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {authLogin} from './store/action/auth';
-import {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom';
+import Navbar from './Navbar';
 
 const LoginPage = () => {
 
@@ -9,8 +10,6 @@ const LoginPage = () => {
     const errorMessage = useSelector((state) => {
         return state.authReducer.error;
     });
-
-    console.log(errorMessage)
 
     const history = useHistory()
 
@@ -32,7 +31,7 @@ const LoginPage = () => {
 
 
     const onFormSubmit = (event) => {
-        event.preventDefault()
+        // event.preventDefault()
         const {username,password} = formData
         dispatch(authLogin(username,password));
         history.push('/');
@@ -40,6 +39,7 @@ const LoginPage = () => {
 
     return (
        <>
+       <Navbar/>
        <p>
            {errorMessage}
        </p>

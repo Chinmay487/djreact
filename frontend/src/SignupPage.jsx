@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {authSignup} from './store/action/auth';
-import {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom';
+import Navbar from './Navbar';
 
 const SignupPage = () => {
 
@@ -39,7 +40,9 @@ const SignupPage = () => {
     }
 
     return (
-        <form onSubmit={onFormSubmit}>
+       <>   
+            <Navbar/>
+             <form onSubmit={onFormSubmit}>
             <p>{errorMessage}</p>
             <label htmlFor="">
                 username : 
@@ -87,6 +90,7 @@ const SignupPage = () => {
             </label>
             <button type="submit">Signup</button>
         </form>
+       </>
     );
 }
 

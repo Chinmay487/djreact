@@ -4,7 +4,6 @@ import {AUTH_START,AUTH_SUCCESS,AUTH_FAIL,AUTH_LOGOUT} from '../action/actionTyp
 const initialState = {
     token : null,
     error : null,
-    status : false
 }
 
 
@@ -38,7 +37,7 @@ const authLogout = (state,action) => {
     // return updateObject(state,{token:null});
     return {
         ...state,
-        token : null
+        token : null,
     }
 }
 

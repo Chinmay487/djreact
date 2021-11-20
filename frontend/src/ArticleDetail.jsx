@@ -2,12 +2,17 @@ import React,{useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
 import UpdateArticleForm from './UpdateArticleForm';
-
+import {useSelector} from 'react-redux';
+import Navbar from './Navbar';
 
 const ArticleDetail = () => {
 
     const articleId = useParams()
-    console.log(articleId.id)
+
+    const authState = useSelector((state)=>{
+        return state.authReducer.token;
+    });
+
 
     const [articleData,setArticleData] = useState({
         title : '',
@@ -29,10 +34,16 @@ const ArticleDetail = () => {
 
     return (
         <>
+            <Navbar/>
             <h1>{articleData.title}</h1>
             <p>{articleData.content}</p>
-            <h3>update</h3>
-            <UpdateArticleForm id={articleId.id}/>
+            {
+                authState !== null? 
+                <UpdateArticleForm id={articleId.id}/> 
+                : 
+                <h1>Login to update article</h1>
+            }
+            
         </>
     );
 }
